@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+service Moeda {
+  rpc Converter (ConverterRequest) returns (ConverterReply) {}
+}
+
+message ConverterRequest {
+  string moedaOrigem = 1;
+  double valorOrigem = 2;
+  string moedaDestino = 3;
+}
+
+message ConverterReply {
+  double valorOrigem = 1;
+  double valorDestino = 2;
+}
