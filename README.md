@@ -2,6 +2,36 @@
 
 Este projeto implementa um serviço de conversão de moedas utilizando gRPC, permitindo ao cliente realizar conversões entre diversas moedas suportadas.
 
+## Introdução à Arquitetura gRPC
+
+gRPC é um framework de chamada de procedimento remoto (RPC) de alta performance, desenvolvido pelo Google. Ele permite a comunicação eficiente entre clientes e servidores através de protocolos baseados em HTTP/2, facilitando a troca de dados estruturados em diversos idiomas e sistemas operacionais.
+
+### Funcionamento do gRPC na Aplicação
+
+1. **Definição do Serviço com `.proto`**:
+   - No arquivo `moeda.proto`, definimos o serviço `Moeda` e o método `Converter`. Esse arquivo `.proto` é utilizado para gerar os códigos gRPC necessários para o cliente e o servidor, garantindo que ambos sigam o mesmo contrato de comunicação.
+   - A definição inclui:
+     - `ConverterRequest`: mensagem de requisição contendo a moeda de origem, valor e moeda de destino.
+     - `ConverterReply`: mensagem de resposta com o valor original e o valor convertido.
+
+2. **Servidor gRPC (`moeda_server.py`)**:
+   - O servidor implementa a lógica do serviço `Moeda`, com o método `Converter` responsável por calcular a conversão de moedas.
+   - Quando o cliente faz uma requisição, o servidor recebe os dados, realiza a consulta das taxas de câmbio via API e retorna o valor convertido.
+   - A arquitetura do servidor gRPC permite que múltiplas requisições sejam processadas simultaneamente, utilizando uma `ThreadPoolExecutor`.
+
+3. **Cliente gRPC (`moeda_client.py`)**:
+   - O cliente configura um canal de comunicação com o servidor (`localhost:50051` por padrão) e faz uma chamada ao método `Converter`.
+   - A chamada envia uma `ConverterRequest` e espera uma `ConverterReply` como resposta, exibindo o valor convertido ao usuário.
+
+### Vantagens do gRPC
+
+- **Desempenho**: A comunicação gRPC utiliza HTTP/2, permitindo multiplexação de requisições, compressão e transmissão de dados binários, o que o torna mais eficiente do que protocolos baseados em texto como JSON/REST.
+- **Definição Estruturada**: O uso de arquivos `.proto` garante uma definição de API rigorosa e compartilhada entre cliente e servidor, minimizando erros de incompatibilidade.
+- **Escalabilidade**: gRPC suporta balanceamento de carga, chamadas paralelas e manuseio eficiente de erros, tornando-o adequado para sistemas distribuídos de larga escala.
+
+Essa arquitetura garante que a aplicação seja eficiente, robusta e escalável para cenários em que cliente e servidor estejam na mesma máquina ou em sistemas distintos.
+
+
 ## Estrutura do Projeto
 
 - **`moeda.proto`**: Arquivo de definição gRPC que define o serviço `Moeda` e o método `Converter`, usado para conversão de moedas.
