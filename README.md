@@ -41,7 +41,55 @@ Essa arquitetura garante que a aplicação seja eficiente, robusta e escalável 
 ## Funcionalidades
 
 O serviço permite a conversão entre as seguintes moedas:
-AUD, BGN, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, HKD, HRK, HUF, IDR, ILS, INR, ISK, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB, SEK, SGD, THB, TRY, USD, ZAR.
+
+<style>
+    .monospace {
+        font-family: 'Courier New', monospace;
+    }
+</style>
+<div style="display: flex;">
+    <div style="flex: 1;">
+        <ul class="monospace">
+            <li>AUD  - Dólar australiano</li>
+            <li>BRL  - Real brasileiro</li>
+            <li>CHF  - Franco suíço</li>
+            <li>CZK  - Coroa checa</li>
+            <li>EUR  - Euro</li>
+            <li>HKD  - Dólar de Hong Kong</li>
+            <li>HUF  - Forint húngaro</li>
+            <li>ILS  - Novo shekel israelita</li>
+            <li>ISK  - Coroa islandesa</li>
+            <li>KRW  - Won coreano</li>
+            <li>MYR  - Ringgit malaio</li>
+            <li>NZD  - Dólar neozelandês</li>
+            <li>PLN  - Zloti polaco</li>
+            <li>RUB  - Rublo russo</li>
+            <li>SGD  - Dólar de Singapura</li>
+            <li>TRY  - Lira turca</li>
+            <li>ZAR  - Rand sul-africano</li>
+        </ul>
+    </div>
+    <div style="flex: 1;">
+        <ul class="monospace">
+            <li>BGN  - Leve búlgaro</li>
+            <li>CAD  - Dólar canadiano</li>
+            <li>CNY  - Yuan Renmimbi chinês</li>
+            <li>DKK  - Coroa dinamarquesa</li>
+            <li>GBP  - Libra esterlina britânica</li>
+            <li>HRK  - Kuna croata</li>
+            <li>IDR  - Rupia indonésia</li>
+            <li>INR  - Rupia indiana</li>
+            <li>JPY  - Iene japonês</li>
+            <li>MXN  - Peso mexicano</li>
+            <li>NOK  - Coroa norueguesa</li>
+            <li>PHP  - Peso filipino</li>
+            <li>RON  - Novo leu romeno</li>
+            <li>SEK  - Coroa sueca</li>
+            <li>THB  - Baht tailandês</li>
+            <li>USD  - Dólar norte-americano</li>
+        </ul>
+    </div>
+</div>
 
 ### Requisitos
 
