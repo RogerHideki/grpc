@@ -60,12 +60,12 @@ class Moeda(moeda_pb2_grpc.MoedaServicer):
 
 
 def serve():
-    port = "50051"
+    porta = "50051"
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     moeda_pb2_grpc.add_MoedaServicer_to_server(Moeda(), server)
-    server.add_insecure_port("[::]:" + port)
+    server.add_insecure_port("[::]:" + porta)
     server.start()
-    print("Server started, listening on " + port)
+    print("Servidor iniciado, escutando em " + porta)
     server.wait_for_termination()
 
 
