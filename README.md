@@ -48,6 +48,24 @@ AUD, BGN, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, HKD, HRK, HUF, IDR, ILS, INR, 
 
    O cliente solicitará ao usuário a moeda de origem, o valor e a moeda de destino. Após enviar a requisição, exibirá o valor convertido.
 
+### Configuração em Máquinas Diferentes
+
+Se o **cliente** e o **servidor** estiverem em máquinas diferentes, siga estas etapas adicionais:
+
+1. **Servidor**: Certifique-se de que o servidor está configurado para aceitar conexões de outras máquinas. No código do servidor (`moeda_server.py`), verifique se a linha `server.add_insecure_port("[::]:50051")` está configurada corretamente. A configuração `[::]:50051` permite que o servidor aceite conexões de qualquer endereço IP.
+
+2. **Cliente**: Atualize o endereço do servidor no código do cliente (`moeda_client.py`).
+   - Substitua `'localhost:50051'` pelo endereço IP da máquina do servidor. Por exemplo:
+     ```python
+     with grpc.insecure_channel('ENDEREÇO_IP_DO_SERVIDOR:50051') as channel:
+     ```
+   - **Exemplo**: Se o servidor tiver o endereço IP `192.168.1.10`, o código deve ser:
+     ```python
+     with grpc.insecure_channel('192.168.1.10:50051') as channel:
+     ```
+
+3. **Firewall e Redes**: Verifique se a porta `50051` está aberta no firewall da máquina do servidor e se não há restrições de rede que impeçam a conexão entre o cliente e o servidor.
+
 ### Exemplo de Execução
 
 - **Servidor**:
