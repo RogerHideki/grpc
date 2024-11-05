@@ -34,8 +34,8 @@ class MoedaStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.Converter = channel.unary_unary(
-                '/Moeda/Converter',
+        self.converter = channel.unary_unary(
+                '/Moeda/converter',
                 request_serializer=moeda__pb2.ConverterRequest.SerializeToString,
                 response_deserializer=moeda__pb2.ConverterReply.FromString,
                 _registered_method=True)
@@ -44,7 +44,7 @@ class MoedaStub(object):
 class MoedaServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def Converter(self, request, context):
+    def converter(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -53,8 +53,8 @@ class MoedaServicer(object):
 
 def add_MoedaServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'Converter': grpc.unary_unary_rpc_method_handler(
-                    servicer.Converter,
+            'converter': grpc.unary_unary_rpc_method_handler(
+                    servicer.converter,
                     request_deserializer=moeda__pb2.ConverterRequest.FromString,
                     response_serializer=moeda__pb2.ConverterReply.SerializeToString,
             ),
@@ -70,7 +70,7 @@ class Moeda(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def Converter(request,
+    def converter(request,
             target,
             options=(),
             channel_credentials=None,
@@ -83,7 +83,7 @@ class Moeda(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/Moeda/Converter',
+            '/Moeda/converter',
             moeda__pb2.ConverterRequest.SerializeToString,
             moeda__pb2.ConverterReply.FromString,
             options,

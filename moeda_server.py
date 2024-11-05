@@ -1,32 +1,32 @@
+import math
 from concurrent import futures
 import logging
+import freecurrencyapi
 import grpc
 import moeda_pb2
 import moeda_pb2_grpc
-import freecurrencyapi
-import math
 
 API_KEY = 'fca_live_PejqVyXV4C9giEKy2roO9m4uTpkiB1IUgnumO3js'
 
 
 class Moeda(moeda_pb2_grpc.MoedaServicer):
-    def Converter(self, request, context):
+    def converter(self, request, context):
         try:
-            moedaOrigem = request.moedaOrigem
-            valorOrigem = request.valorOrigem
-            moedaDestino = request.moedaDestino
+            moeda_origem = request.moeda_origem
+            valor_origem = request.valor_origem
+            moeda_destino = request.moeda_destino
 
-            moedasValidas = ["AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR",
-                             "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JPY",
-                             "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB",
-                             "SEK", "SGD", "THB", "TRY", "USD", "ZAR"]
+            moedas_validas = ["AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR",
+                              "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JPY",
+                              "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB",
+                              "SEK", "SGD", "THB", "TRY", "USD", "ZAR"]
 
-            if moedaOrigem not in moedasValidas:
+            if moeda_origem not in moedas_validas:
                 context.set_details("Moeda de origem inválida.")
                 context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
                 return moeda_pb2.ConverterReply()
 
-            if moedaDestino not in moedasValidas:
+            if moeda_destino not in moedas_validas:
                 context.set_details("Moeda de destino inválida.")
                 context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
                 return moeda_pb2.ConverterReply()
@@ -34,28 +34,28 @@ class Moeda(moeda_pb2_grpc.MoedaServicer):
             client = freecurrencyapi.Client(API_KEY)
             try:
                 moedas = client.currencies(
-                    currencies=[moedaOrigem, moedaDestino])['data']
-                taxasCambio = client.latest()['data']
+                    currencies=[moeda_origem, moeda_destino])['data']
+                taxas_cambio = client.latest()['data']
             except Exception as e:
                 context.set_details("Erro ao conectar com a API de câmbio.")
                 context.set_code(grpc.StatusCode.INTERNAL)
                 return moeda_pb2.ConverterReply()
 
-            valorOrigem = self.truncarFloat(
-                valorOrigem, moedas[moedaOrigem]['decimal_digits'])
-            valorDestino = (
-                valorOrigem / taxasCambio[moedaOrigem] * taxasCambio[moedaDestino])
-            valorDestino = self.truncarFloat(
-                valorDestino, moedas[moedaDestino]['decimal_digits'])
+            valor_origem = self.truncar_float(
+                valor_origem, moedas[moeda_origem]['decimal_digits'])
+            valor_destino = (
+                valor_origem / taxas_cambio[moeda_origem] * taxas_cambio[moeda_destino])
+            valor_destino = self.truncar_float(
+                valor_destino, moedas[moeda_destino]['decimal_digits'])
 
-            return moeda_pb2.ConverterReply(valorOrigem=valorOrigem, valorDestino=valorDestino)
+            return moeda_pb2.ConverterReply(valor_origem=valor_origem, valor_destino=valor_destino)
         except Exception as e:
             logging.error(f"Erro inesperado: {e}")
             context.set_details("Erro inesperado durante a conversão.")
             context.set_code(grpc.StatusCode.INTERNAL)
             return moeda_pb2.ConverterReply()
 
-    def truncarFloat(self, valor, escala):
+    def truncar_float(self, valor, escala):
         return math.trunc(valor * (10 ** escala)) / (10 ** escala)
 
 

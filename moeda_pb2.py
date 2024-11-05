@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bmoeda.proto\"R\n\x10\x43onverterRequest\x12\x13\n\x0bmoedaOrigem\x18\x01 \x01(\t\x12\x13\n\x0bvalorOrigem\x18\x02 \x01(\x01\x12\x14\n\x0cmoedaDestino\x18\x03 \x01(\t\";\n\x0e\x43onverterReply\x12\x13\n\x0bvalorOrigem\x18\x01 \x01(\x01\x12\x14\n\x0cvalorDestino\x18\x02 \x01(\x01\x32:\n\x05Moeda\x12\x31\n\tConverter\x12\x11.ConverterRequest\x1a\x0f.ConverterReply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bmoeda.proto\"U\n\x10\x43onverterRequest\x12\x14\n\x0cmoeda_origem\x18\x01 \x01(\t\x12\x14\n\x0cvalor_origem\x18\x02 \x01(\x01\x12\x15\n\rmoeda_destino\x18\x03 \x01(\t\"=\n\x0e\x43onverterReply\x12\x14\n\x0cvalor_origem\x18\x01 \x01(\x01\x12\x15\n\rvalor_destino\x18\x02 \x01(\x01\x32:\n\x05Moeda\x12\x31\n\tconverter\x12\x11.ConverterRequest\x1a\x0f.ConverterReply\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,9 +32,9 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'moeda_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_CONVERTERREQUEST']._serialized_start=15
-  _globals['_CONVERTERREQUEST']._serialized_end=97
-  _globals['_CONVERTERREPLY']._serialized_start=99
-  _globals['_CONVERTERREPLY']._serialized_end=158
-  _globals['_MOEDA']._serialized_start=160
-  _globals['_MOEDA']._serialized_end=218
+  _globals['_CONVERTERREQUEST']._serialized_end=100
+  _globals['_CONVERTERREPLY']._serialized_start=102
+  _globals['_CONVERTERREPLY']._serialized_end=163
+  _globals['_MOEDA']._serialized_start=165
+  _globals['_MOEDA']._serialized_end=223
 # @@protoc_insertion_point(module_scope)

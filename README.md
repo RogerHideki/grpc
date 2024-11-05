@@ -9,18 +9,18 @@ gRPC é um framework de chamada de procedimento remoto (RPC) de alta performance
 ### Funcionamento do gRPC na Aplicação
 
 1. **Definição do Serviço com `.proto`**:
-   - No arquivo `moeda.proto`, definimos o serviço `Moeda` e o método `Converter`. Esse arquivo `.proto` é utilizado para gerar os códigos gRPC necessários para o cliente e o servidor, garantindo que ambos sigam o mesmo contrato de comunicação.
+   - No arquivo `moeda.proto`, definimos o serviço `Moeda` e o método `converter`. Esse arquivo `.proto` é utilizado para gerar os códigos gRPC necessários para o cliente e o servidor, garantindo que ambos sigam o mesmo contrato de comunicação.
    - A definição inclui:
      - `ConverterRequest`: mensagem de requisição contendo a moeda de origem, valor e moeda de destino.
      - `ConverterReply`: mensagem de resposta com o valor original e o valor convertido.
 
 2. **Servidor gRPC (`moeda_server.py`)**:
-   - O servidor implementa a lógica do serviço `Moeda`, com o método `Converter` responsável por calcular a conversão de moedas.
+   - O servidor implementa a lógica do serviço `Moeda`, com o método `converter` responsável por calcular a conversão de moedas.
    - Quando o cliente faz uma requisição, o servidor recebe os dados, realiza a consulta das taxas de câmbio via API e retorna o valor convertido.
    - A arquitetura do servidor gRPC permite que múltiplas requisições sejam processadas simultaneamente, utilizando uma `ThreadPoolExecutor`.
 
 3. **Cliente gRPC (`moeda_client.py`)**:
-   - O cliente configura um canal de comunicação com o servidor (`localhost:50051` por padrão) e faz uma chamada ao método `Converter`.
+   - O cliente configura um canal de comunicação com o servidor (`localhost:50051` por padrão) e faz uma chamada ao método `converter`.
    - A chamada envia uma `ConverterRequest` e espera uma `ConverterReply` como resposta, exibindo o valor convertido ao usuário.
 
 ### Vantagens do gRPC
@@ -34,7 +34,7 @@ Essa arquitetura garante que a aplicação seja eficiente, robusta e escalável 
 
 ## Estrutura do Projeto
 
-- **`moeda.proto`**: Arquivo de definição gRPC que define o serviço `Moeda` e o método `Converter`, usado para conversão de moedas.
+- **`moeda.proto`**: Arquivo de definição gRPC que define o serviço `Moeda` e o método `converter`, usado para conversão de moedas.
 - **`moeda_server.py`**: Servidor gRPC que implementa o serviço de conversão. O servidor utiliza a API `freecurrencyapi` para obter taxas de câmbio em tempo real.
 - **`moeda_client.py`**: Cliente gRPC que se conecta ao servidor e solicita a conversão de uma moeda de origem para uma moeda de destino.
 
@@ -166,21 +166,17 @@ Se o **cliente** e o **servidor** estiverem em máquinas diferentes, siga estas 
 ### Estrutura da API gRPC
 
 - **Serviço**: `Moeda`
-  - **Método**: `Converter`
+  - **Método**: `converter`
     - **Requisição** (`ConverterRequest`):
-      - `moedaOrigem` (string): Código da moeda de origem (ex: USD).
-      - `valorOrigem` (double): Valor a ser convertido.
-      - `moedaDestino` (string): Código da moeda de destino (ex: EUR).
+      - `moeda_origem` (string): Código da moeda de origem (ex: USD).
+      - `valor_origem` (double): Valor a ser convertido.
+      - `moeda_destino` (string): Código da moeda de destino (ex: EUR).
     - **Resposta** (`ConverterReply`):
-      - `valorOrigem` (double): Valor original fornecido na moeda de origem.
-      - `valorDestino` (double): Valor convertido na moeda de destino.
+      - `valor_origem` (double): Valor original fornecido na moeda de origem.
+      - `valor_destino` (double): Valor convertido na moeda de destino.
 
 ### Tratamento de Erros
 
 - **Moeda inválida**: Se a moeda de origem ou destino não for válida, o servidor retorna um erro `INVALID_ARGUMENT`.
 - **Falha de API**: Em caso de erro na conexão com a API de câmbio, o servidor retorna um erro `INTERNAL`.
 - **Erro inesperado**: Caso ocorra uma exceção não prevista, o servidor retorna um erro `INTERNAL` com a descrição do problema.
-
-### Licença
-
-Este projeto é distribuído sob a licença MIT.

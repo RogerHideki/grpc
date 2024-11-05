@@ -11,22 +11,22 @@ def run():
           "\nKRW, MXN, MYR, NOK, NZD, PHP, PLN, RON, RUB," +
           "\nSEK, SGD, THB, TRY, USD, ZAR")
 
-    moedaOrigem = input("\nDigite a moeda de origem: ").upper()
+    moeda_origem = input("\nDigite a moeda de origem: ").upper()
     try:
-        valorOrigem = float(input("Digite o valor de origem: "))
+        valor_origem = float(input("Digite o valor de origem: "))
     except ValueError:
         print("\nErro: O valor de origem deve ser um número válido.")
         return
-    moedaDestino = input("Digite a moeda de destino: ").upper()
+    moeda_destino = input("Digite a moeda de destino: ").upper()
 
     try:
         with grpc.insecure_channel('localhost:50051') as channel:
             stub = moeda_pb2_grpc.MoedaStub(channel)
             try:
-                reply = stub.Converter(moeda_pb2.ConverterRequest(
-                    moedaOrigem=moedaOrigem, valorOrigem=valorOrigem, moedaDestino=moedaDestino))
-                print(f'\n{moedaOrigem} {reply.valorOrigem} = {
-                    moedaDestino} {reply.valorDestino}')
+                reply = stub.converter(moeda_pb2.ConverterRequest(
+                    moeda_origem=moeda_origem, valor_origem=valor_origem, moeda_destino=moeda_destino))
+                print(
+                    f'\n{moeda_origem} {reply.valor_origem} = {moeda_destino} {reply.valor_destino}')
             except grpc.RpcError as e:
                 if e.code() == grpc.StatusCode.INVALID_ARGUMENT:
                     print(f"\nErro de argumento inválido: {e.details()}")
