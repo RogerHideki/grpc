@@ -42,54 +42,51 @@ Essa arquitetura garante que a aplicação seja eficiente, robusta e escalável 
 
 O serviço permite a conversão entre as seguintes moedas:
 
-<style>
-    .monospace {
-        font-family: 'Courier New', monospace;
-    }
-</style>
-<div style="display: flex;">
-    <div style="flex: 1;">
-        <ul class="monospace">
-            <li>AUD  - Dólar australiano</li>
-            <li>BRL  - Real brasileiro</li>
-            <li>CHF  - Franco suíço</li>
-            <li>CZK  - Coroa checa</li>
-            <li>EUR  - Euro</li>
-            <li>HKD  - Dólar de Hong Kong</li>
-            <li>HUF  - Forint húngaro</li>
-            <li>ILS  - Novo shekel israelita</li>
-            <li>ISK  - Coroa islandesa</li>
-            <li>KRW  - Won coreano</li>
-            <li>MYR  - Ringgit malaio</li>
-            <li>NZD  - Dólar neozelandês</li>
-            <li>PLN  - Zloti polaco</li>
-            <li>RUB  - Rublo russo</li>
-            <li>SGD  - Dólar de Singapura</li>
-            <li>TRY  - Lira turca</li>
-            <li>ZAR  - Rand sul-africano</li>
-        </ul>
-    </div>
-    <div style="flex: 1;">
-        <ul class="monospace">
-            <li>BGN  - Leve búlgaro</li>
-            <li>CAD  - Dólar canadiano</li>
-            <li>CNY  - Yuan Renmimbi chinês</li>
-            <li>DKK  - Coroa dinamarquesa</li>
-            <li>GBP  - Libra esterlina britânica</li>
-            <li>HRK  - Kuna croata</li>
-            <li>IDR  - Rupia indonésia</li>
-            <li>INR  - Rupia indiana</li>
-            <li>JPY  - Iene japonês</li>
-            <li>MXN  - Peso mexicano</li>
-            <li>NOK  - Coroa norueguesa</li>
-            <li>PHP  - Peso filipino</li>
-            <li>RON  - Novo leu romeno</li>
-            <li>SEK  - Coroa sueca</li>
-            <li>THB  - Baht tailandês</li>
-            <li>USD  - Dólar norte-americano</li>
-        </ul>
-    </div>
-</div>
+<table>
+  <tr>
+    <td>
+      <ul>
+        <li><code>AUD - Dólar australiano</code></li>
+        <li><code>BRL - Real brasileiro</code></li>
+        <li><code>CHF - Franco suíço</code></li>
+        <li><code>CZK - Coroa checa</code></li>
+        <li><code>EUR - Euro</code></li>
+        <li><code>HKD - Dólar de Hong Kong</code></li>
+        <li><code>HUF - Forint húngaro</code></li>
+        <li><code>ILS - Novo shekel israelita</code></li>
+        <li><code>ISK - Coroa islandesa</code></li>
+        <li><code>KRW - Won coreano</code></li>
+        <li><code>MYR - Ringgit malaio</code></li>
+        <li><code>NZD - Dólar neozelandês</code></li>
+        <li><code>PLN - Zloti polaco</code></li>
+        <li><code>RUB - Rublo russo</code></li>
+        <li><code>SGD - Dólar de Singapura</code></li>
+        <li><code>TRY - Lira turca</code></li>
+        <li><code>ZAR - Rand sul-africano</code></li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li><code>BGN - Leve búlgaro</code></li>
+        <li><code>CAD - Dólar canadiano</code></li>
+        <li><code>CNY - Yuan Renmimbi chinês</code></li>
+        <li><code>DKK - Coroa dinamarquesa</code></li>
+        <li><code>GBP - Libra esterlina britânica</code></li>
+        <li><code>HRK - Kuna croata</code></li>
+        <li><code>IDR - Rupia indonésia</code></li>
+        <li><code>INR - Rupia indiana</code></li>
+        <li><code>JPY - Iene japonês</code></li>
+        <li><code>MXN - Peso mexicano</code></li>
+        <li><code>NOK - Coroa norueguesa</code></li>
+        <li><code>PHP - Peso filipino</code></li>
+        <li><code>RON - Novo leu romeno</code></li>
+        <li><code>SEK - Coroa sueca</code></li>
+        <li><code>THB - Baht tailandês</code></li>
+        <li><code>USD - Dólar norte-americano</code></li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
 ### Requisitos
 
